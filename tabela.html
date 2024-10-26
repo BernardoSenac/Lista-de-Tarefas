@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Afazeres</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center; 
+            margin-bottom: 20px;
+        }
+
+        input {
+            margin-right: 10px;
+            padding: 10px;
+            border: 2px solid #007bff;
+            border-radius: 4px;
+            flex: 1;
+            max-width: 950px; 
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: 2px solid #007bff;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        table {
+            width: 60%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            border: 2px solid #0056b3;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .deletar {
+            width: 30px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .deletar:hover::after {
+            content: "❌";
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <input type="text" id="tarefa" placeholder="Nova tarefa..." minlength="3" maxlength="100" required>
+        <button id="btnAdicionar" onclick="adicionarTarefa();">Adicionar</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>nº</th>
+                <th>Tarefas</th>
+                <th>🗑️</th>
+            </tr>
+        </thead>
+        <tbody id="tabelaAfazeres">
+        </tbody>
+    </table>
+
+    <script>
+        var contagem = 0;
+        function adicionarTarefa(){
+            var tarefa = document.getElementById("tarefa").value;
+            var tbody = document.getElementById("tabelaAfazeres");
+            contagem++;
+            
+            tbody.innerHTML += `<tr><td>${contagem}</td><td>${tarefa}</td><td class="deletar" onclick="deletarTarefa(this);"></td></tr>`;
+            document.getElementById("tarefa").value = '';
+        }
+
+        function deletarTarefa(element){
+            var row = element.parentNode;
+            row.parentNode.removeChild(row);
+        }
+    </script>
+</body>
+</html>
